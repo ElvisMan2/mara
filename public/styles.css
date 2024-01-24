@@ -1,0 +1,139 @@
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: roboto;
+}
+
+/* Contenedor principal */
+#contenedor {
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Navegación */
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+
+.navbar-collapse {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2em;
+    font-family: roboto;
+    font-weight: bold;
+    background-color: #007872;
+    max-width: 1200px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.nav-item a {
+    color: white !important;
+}
+
+
+.form-clientes {
+    margin: 40px 0;
+    text-align: center;
+    font-size: 1.2em;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-clientes h1, .table-clients h1 {
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.form-clientes p {
+    max-width: 800px;
+    margin: 25px auto 0 auto;
+    font-size: 0.9em;
+}
+
+
+.footer {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    background-color: #007872;
+    margin-top: 20px;
+    color: white;
+}
+
+.footer div {
+    padding-top: 20px;
+}
+
+.footer figure {
+    padding-top: 30px;
+    margin-left: 20px;
+    height: 100px;
+}
+
+#clientForm {
+    max-width: 400px; /* Ajusta el ancho máximo según tus necesidades */
+    margin: auto; /* Centra el formulario horizontalmente */
+}
+
+label {
+    display: inline-block;
+    width: 80px; /* Ajusta el ancho del label según tus necesidades */
+    text-align: right;
+    margin-right: 10px; /* Espaciado entre el label y el campo de entrada */
+    font-size: medium;
+}
+
+input {
+    width: 250px; /* Ajusta el ancho del campo de entrada según tus necesidades */
+    padding: 5px;
+    box-sizing: border-box; /* Incluye el relleno y el borde en el ancho total */
+}
+
+input[type="submit"] {
+    width: auto; /* Ajusta el ancho del botón de envío según el contenido */
+}
+
+.table-clients {
+    margin-left: auto;
+    margin-top: auto;
+}
+
+#lastTenClients {
+    max-width: 800px; /* Ajusta el ancho máximo según tus necesidades */
+    margin: auto; /* Centra horizontalmente */
+    border: 1px solid #007872;
+
+}
+
+#lastTenClients th{
+    width: 150px;
+    
+}
+
+#lastTenClients th,
+#lastTenClients td {
+    border: 1px solid #007872; /* Agrega un borde de 1px a todas las celdas */
+    padding: 8px; /* Ajusta el espaciado interno según tus preferencias */
+    text-align: left; /* Ajusta la alineación del texto según tus preferencias */
+}
+
+#lastTenClients thead tr:first-child {
+    background-color: #007872; /* Fondo de la primera fila */
+    color: white; /* Color del texto de la primera fila */
+}
+
+.accordion-button, .accordion-button:focus{
+    background-color: #007872;
+    color: white;
+
+}
+
