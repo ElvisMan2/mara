@@ -14,7 +14,30 @@ const getCalificaciones = (req, res) => {
     });
 };
 
-process.on('SIGINT', () => {
+
+
+const updateCalificaciones = (req, res) => {
+    const nuevasCalificaciones = req.body; // Suponiendo que envías un array de objetos con las nuevas calificaciones
+  
+    // Realiza las actualizaciones en la base de datos
+    nuevasCalificaciones.forEach(calificacion => {
+      const { codigo, parcial, final, continua, promedio } = calificacion;
+      db.run(
+        'UPDATE calificaciones SET parcial = ?, final = ?, continua = ?, promedio = ? WHERE codigo = ?',
+        [parcial, final, continua, promedio, codigo],
+        (err) => {
+          if (err) {
+            console.error(err.message);
+          }
+        }
+      );
+    });
+  
+    res.json({ message: 'Calificaciones actualizadas correctamente' });
+  };
+
+
+  process.on('SIGINT', () => {
     db.close((err) => {
         if (err) {
             console.error(err.message);
@@ -24,4 +47,4 @@ process.on('SIGINT', () => {
     });
 });
 
-module.exports={getCalificaciones};
+module.exports={getCalificaciones, updateCalificaciones};
