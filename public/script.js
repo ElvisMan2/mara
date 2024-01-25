@@ -1,6 +1,6 @@
     document.addEventListener("DOMContentLoaded", () => {
       // Hacer la solicitud a la API
-      fetch('http://localhost:3000/calificaciones') // Cambia la URL según donde se encuentre tu API
+      fetch('http://localhost:3000/calificaciones') 
         .then(response => response.json())
         .then(data => {
           // Procesar los datos y agregar filas a la tabla
@@ -24,10 +24,10 @@
               <td>${registro.nombres}</td>
               <td>${registro.apellidos}</td>
               <td>${registro.celular}</td>
-              <td><input type="text" value="${registro.parcial}"> </td>
-              <td><input type="text" value="${registro.final}"> </td>
-              <td><input type="text" value="${registro.continua}"> </td>
-              <td><input type="text" value="${registro.promedio}"> </td>
+              <td><input type="text" class="parcial" value="${registro.parcial}"> </td>
+              <td><input type="text" class="final" value="${registro.final}"> </td>
+              <td><input type="text" class="continua" value="${registro.continua}"> </td>
+              <td><input type="text" class="promedio" value="${registro.promedio}"> </td>
               
             `;
             tableBody.appendChild(row);
@@ -39,24 +39,29 @@
 
 
   function guardarCalificaciones() {
+    
     const tableRows = document.querySelectorAll('#calificacionesTable tbody tr');
     const nuevasCalificaciones = [];
 
     tableRows.forEach(row => {
       const cells = row.getElementsByTagName('td');
+      const cellsNotas = row.getElementsByTagName('input');
+      
+      
       const calificacion = {
         codigo: cells[0].innerText,
-        parcial: cells[4].innerText,
-        final: cells[5].innerText,
-        continua: cells[6].innerText,
-        promedio: cells[7].innerText,
-        tipo: cells[8].innerText
+        parcial: cellsNotas[0].value,
+        final: cellsNotas[1].value,
+        continua: cellsNotas[2].value,
+        promedio: cellsNotas[3].value,
       };
+
+
       nuevasCalificaciones.push(calificacion);
     });
 
     // Realiza la solicitud al servidor para actualizar las calificaciones
-    fetch('/api/calificaciones', {
+    fetch('http://localhost:3000/calificaciones', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -66,6 +71,35 @@
     .then(response => response.json())
     .then(data => {
       console.log(data.message);
+      alert("Calificaciones guardadas correctamente")
     })
     .catch(error => console.error('Error al guardar calificaciones:', error));
+  }
+
+  function calcularPromedio(){
+    
+    var tabla = document.getElementById('calificacionesTable');
+    var filas = tabla.getElementsByTagName('tr');
+
+    for (var i = 1; i < filas.length; i++){
+      var fila = filas[i];
+
+      //extrayendo las calificaciones:
+      var inputParcial = fila.querySelector('.parcial');
+      var parcial = parseFloat(inputParcial.value);
+
+      var inputFinal = fila.querySelector('.final');
+      var final = parseFloat(inputFinal.value);
+
+      var inputContinua = fila.querySelector('.continua');
+      var continua = parseFloat(inputContinua.value);
+
+      var promedio=(0.3*parcial+0.3*final+0.4*continua)
+
+      var inputPromedio = fila.querySelector('.promedio')
+      inputPromedio.value=promedio.toFixed(0);
+
+    }
+
+    alert("Promedios calculados!")
   }
