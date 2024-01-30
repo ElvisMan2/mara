@@ -12,6 +12,18 @@
       background-color: #f2f2f2;
     }
 
-    input{
+   #calificaciones input{
         max-width: 30px;
     }
+
+    #footer{
+      background-color: #0E78F0;
+      color: white;
+  }
+
+  #banner{
+    background-image: url('./images/fondo-final-pagina-central.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 150px;
+  }
