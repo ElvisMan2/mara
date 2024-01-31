@@ -21,10 +21,10 @@ const updateCalificaciones = (req, res) => {
   
     // Realiza las actualizaciones en la base de datos
     nuevasCalificaciones.forEach(calificacion => {
-      const { codigo, parcial, final, continua, promedio } = calificacion;
+      const { codigo, celular, parcial, final, continua, promedio } = calificacion;
       db.run(
-        'UPDATE calificaciones SET parcial = ?, final = ?, continua = ?, promedio = ? WHERE codigo = ?',
-        [parcial, final, continua, promedio, codigo],
+        'UPDATE calificaciones SET celular=?, parcial = ?, final = ?, continua = ?, promedio = ? WHERE codigo = ?',
+        [celular, parcial, final, continua, promedio, codigo],
         (err) => {
           if (err) {
             console.error(err.message);

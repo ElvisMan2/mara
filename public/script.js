@@ -23,7 +23,7 @@
               <td>${registro.codigo}</td>
               <td>${registro.nombres}</td>
               <td>${registro.apellidos}</td>
-              <td>${registro.celular}</td>
+              <td><input type="text" class="celular" value="${registro.celular}"> </td>
               <td><input type="text" class="parcial" value="${registro.parcial}"> </td>
               <td><input type="text" class="final" value="${registro.final}"> </td>
               <td><input type="text" class="continua" value="${registro.continua}"> </td>
@@ -50,10 +50,11 @@
       
       const calificacion = {
         codigo: cells[0].innerText,
-        parcial: cellsNotas[0].value,
-        final: cellsNotas[1].value,
-        continua: cellsNotas[2].value,
-        promedio: cellsNotas[3].value,
+        celular: cellsNotas[0].value,
+        parcial: cellsNotas[1].value,
+        final: cellsNotas[2].value,
+        continua: cellsNotas[3].value,
+        promedio: cellsNotas[4].value,
       };
 
 
@@ -102,4 +103,30 @@
     }
 
     alert("Promedios calculados!")
+  }
+
+  function iniciarSesion(){
+    
+    var usuario=document.getElementById('usuario').value;
+    var contrasena=document.getElementById('contrasena').value;
+
+    if(usuario=='docente' && contrasena=='docente123'){
+      window.location.href = './menu.html';
+    }
+    else{
+      if(usuario=='delegado' && contrasena=='delegado123'){
+        window.location.href = './menu.html';
+      }
+      else{
+        if(usuario=='alumno' && contrasena=='alumno123'){
+          window.location.href = './menu.html';
+        }
+        else{
+          alert('contraseña incorrecta');
+          
+        }
+      }
+      
+    }
+    
   }

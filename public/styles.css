@@ -12,8 +12,11 @@
       background-color: #f2f2f2;
     }
 
-   #calificaciones input{
-        max-width: 30px;
+    .parcial, .final, .continua, .promedio{
+      max-width: 30px;
+    }
+    .celular{
+      max-width: 90px;
     }
 
     #footer{
