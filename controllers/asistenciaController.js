@@ -14,7 +14,25 @@ const getAsistencia = (req, res) => {
     });
 };
 
+const updateAsistencia = (req, res) => {
+  const nuevaAsistencia = req.body; // 
 
+  // Realiza las actualizaciones en la base de datos
+  nuevaAsistencia.forEach(asistencia => {
+    const { codigo, a1, a2, a3, a4, a5, a6, a7, a8 } = asistencia;
+    db.run(
+      'UPDATE calificaciones SET a1=?, a2=?, a3=?, a4=?, a5=?, a6=?, a7=?, a8=? WHERE codigo = ?',
+      [a1, a2, a3, a4, a5, a6, a7, a8, codigo],
+      (err) => {
+        if (err) {
+          console.error(err.message);
+        }
+      }
+    );
+  });
+
+  res.json({ message: 'Asistencia registrada' });
+};
 
 
 
@@ -29,4 +47,4 @@ const getAsistencia = (req, res) => {
     });
 });
 
-module.exports={getAsistencia};
+module.exports={getAsistencia, updateAsistencia};

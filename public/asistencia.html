@@ -61,6 +61,77 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   <script src="./script.js"></script>
 
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+          // Hacer la solicitud a la API
+          fetch('http://localhost:3000/asistencia') 
+            .then(response => response.json())
+            .then(data => {
+              // Procesar los datos y agregar filas a la tabla
+              const tableBody = document.querySelector('#calificacionesTable tbody');
+              data.forEach(registro => {
+                const row = document.createElement('tr');
+                if(registro.a1==null){
+                    registro.a1='-';
+                }
+                
+                row.innerHTML = `
+                  <td>${registro.codigo}</td>
+                  <td>${registro.nombres}</td>
+                  <td>${registro.apellidos}</td>
+                  <td><select class="a1">
+                    <option value="F" ${registro.a1 === null ? 'selected' : ''}>-</option>
+                    <option value="A" ${registro.a1 === 'A' ? 'selected' : ''}>A</option>
+                    <option value="F" ${registro.a1 === 'F' ? 'selected' : ''}>F</option></select>
+                  </td>
+                  <td><select class="a2">
+                    <option value="F" ${registro.a2 === null ? 'selected' : ''}>-</option>
+                    <option value="A" ${registro.a2 === 'A' ? 'selected' : ''}>A</option>
+                    <option value="F" ${registro.a2 === 'F' ? 'selected' : ''}>F</option></select>
+                  </td>
+                  <td><select class="a3">
+                    <option value="F" ${registro.a3 === null ? 'selected' : ''}>-</option>
+                    <option value="A" ${registro.a3 === 'A' ? 'selected' : ''}>A</option>
+                    <option value="F" ${registro.a3 === 'F' ? 'selected' : ''}>F</option></select>
+                  </td>
+                  <td><select class="a4">
+                    <option value="F" ${registro.a4 === null ? 'selected' : ''}>-</option>
+                    <option value="A" ${registro.a4 === 'A' ? 'selected' : ''}>A</option>
+                    <option value="F" ${registro.a4 === 'F' ? 'selected' : ''}>F</option></select>
+                  </td>
+                  <td><select class="a5">
+                    <option value="F" ${registro.a5 === null ? 'selected' : ''}>-</option>
+                    <option value="A" ${registro.a5 === 'A' ? 'selected' : ''}>A</option>
+                    <option value="F" ${registro.a5 === 'F' ? 'selected' : ''}>F</option></select>
+                  </td>
+                  <td><select class="a6">
+                    <option value="F" ${registro.a6 === null ? 'selected' : ''}>-</option>
+                    <option value="A" ${registro.a6 === 'A' ? 'selected' : ''}>A</option>
+                    <option value="F" ${registro.a6 === 'F' ? 'selected' : ''}>F</option></select>
+                  </td>
+                  <td><select class="a7">
+                    <option value="F" ${registro.a7 === null ? 'selected' : ''}>-</option>
+                    <option value="A" ${registro.a7 === 'A' ? 'selected' : ''}>A</option>
+                    <option value="F" ${registro.a7 === 'F' ? 'selected' : ''}>F</option></select>
+                  </td>
+                  <td><select class="a8">
+                    <option value="F" ${registro.a8 === null ? 'selected' : ''}>-</option>
+                    <option value="A" ${registro.a8 === 'A' ? 'selected' : ''}>A</option>
+                    <option value="F" ${registro.a8 === 'F' ? 'selected' : ''}>F</option></select>
+                  </td>
+
+  
+                  
+                `;
+                tableBody.appendChild(row);
+              });
+            })
+            .catch(error => console.error('Error al obtener datos:', error));
+        });
+    
+  </script>
+
   
 
 </body>
