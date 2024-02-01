@@ -100,38 +100,43 @@
   function guardarAsistencia() {
     
     const tableRows = document.querySelectorAll('#calificacionesTable tbody tr');
-    const nuevasCalificaciones = [];
+    const nuevasAsistencias = [];
 
     tableRows.forEach(row => {
       const cells = row.getElementsByTagName('td');
-      const cellsNotas = row.getElementsByTagName('input');
+      const cellsAsistencia = row.getElementsByTagName('select');
       
       
-      const calificacion = {
+      const asistencia = {
         codigo: cells[0].innerText,
-        celular: cellsNotas[0].value,
-        parcial: cellsNotas[1].value,
-        final: cellsNotas[2].value,
-        continua: cellsNotas[3].value,
-        promedio: cellsNotas[4].value,
-      };
+
+        a1: cellsAsistencia[0].value,
+        a2: cellsAsistencia[1].value,
+        a3: cellsAsistencia[2].value,
+        a4: cellsAsistencia[3].value,
+        a5: cellsAsistencia[4].value,
+        a6: cellsAsistencia[5].value,
+        a7: cellsAsistencia[6].value,
+        a8: cellsAsistencia[7].value,
+
+        };
 
 
-      nuevasCalificaciones.push(calificacion);
+      nuevasAsistencias.push(asistencia);
     });
 
-    // Realiza la solicitud al servidor para actualizar las calificaciones
-    fetch('http://localhost:3000/calificaciones', {
+    // Realiza la solicitud al servidor para actualizar las asistencia
+    fetch('http://localhost:3000/asistencia', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(nuevasCalificaciones),
+      body: JSON.stringify(nuevasAsistencias),
     })
     .then(response => response.json())
     .then(data => {
       console.log(data.message);
-      alert("Calificaciones guardadas correctamente")
+      alert("Asistencia Registrada")
     })
-    .catch(error => console.error('Error al guardar calificaciones:', error));
+    .catch(error => console.error('Error al guardar la asistencia:', error));
   }
