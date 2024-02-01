@@ -1,12 +1,6 @@
-// routes/asistencia.js
+const asistenciaController = require('../controllers/asistenciaController');
 
-const express = require("express");
-const router = express.Router();
+module.exports=(app)=>{
+    app.route('/asistencia').get(asistenciaController.getAsistencia);
 
-router.get("/", (req, res) => {
-    res.send("Ruta de asistencia");
-});
-
-// Puedes agregar más rutas y lógica relacionada con la asistencia aquí
-
-module.exports = router;
+}

@@ -12,11 +12,11 @@ app.use(express.static('public'));
 
 // Importar las rutas existentes
 const calificacionesRoutes = require('./routes/calificaciones');
-const asistenciaRoutes = require('./routes/asistencia'); // Nueva ruta
+const asistenciaRoutes = require('./routes/asistencia'); 
 
 // Usar las rutas en la aplicación
 calificacionesRoutes(app);
-app.use('/asistencia', asistenciaRoutes); // La ruta de asistencia estará bajo /asistencia
+asistenciaRoutes(app);
 
 app.listen(port, () => {
     console.log(`Servidor escuchando en el puerto ${port}`);
