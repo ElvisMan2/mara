@@ -80,7 +80,7 @@
     }
     else{
       if(usuario=='delegado' && contrasena=='delegado123'){
-        window.location.href = './menu.html';
+        window.location.href = './actualizarNumero.html';
       }
       else{
         if(usuario=='alumno' && contrasena=='alumno123'){
@@ -139,4 +139,46 @@
       alert("Asistencia Registrada")
     })
     .catch(error => console.error('Error al guardar la asistencia:', error));
+  }
+
+
+
+    function guardarNumero() {
+    
+    const tableRows = document.querySelectorAll('#calificacionesTable tbody tr');
+    const nuevasCalificaciones = [];
+
+    tableRows.forEach(row => {
+      const cells = row.getElementsByTagName('td');
+      const cellsNotas = row.getElementsByTagName('input');
+      
+      
+      const calificacion = {
+        codigo: cells[0].innerText,
+        parcial: cells[4].innerText,
+        final: cells[5].innerText,
+        continua: cells[6].innerText,
+        promedio: cells[7].innerText,
+
+        celular: cellsNotas[0].value,
+      };
+
+
+      nuevasCalificaciones.push(calificacion);
+    });
+
+    // Realiza la solicitud al servidor para actualizar las calificaciones
+    fetch('http://localhost:3000/calificaciones', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(nuevasCalificaciones),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data.message);
+      alert("Numeros guardados")
+    })
+    .catch(error => console.error('Error al guardar calificaciones:', error));
   }
