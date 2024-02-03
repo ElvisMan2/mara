@@ -83,13 +83,26 @@
         window.location.href = './actualizarNumero.html';
       }
       else{
-        if(usuario=='alumno' && contrasena=='alumno123'){
-          window.location.href = './menu.html';
+        if(usuario==contrasena){
+         
+          
+          
+          window.location.href = './reclamoAlumno.html';
+          
+
+          
+
+
+
+
+
+
         }
         else{
           alert('contraseña incorrecta');
           
         }
+        
       }
       
     }
@@ -181,4 +194,104 @@
       alert("Numeros guardados")
     })
     .catch(error => console.error('Error al guardar calificaciones:', error));
+  }
+
+
+
+
+
+  
+  function guardarRespuestas() {
+  
+    const tableRows = document.querySelectorAll('#calificacionesTable tbody tr');
+    const nuevasRes = [];
+
+    tableRows.forEach(row => {
+      const cells = row.getElementsByTagName('td');
+      const cellsRespuesta = row.getElementsByTagName('textarea');
+      
+      let estadoAsignado;
+
+      if (cellsRespuesta[0].value.trim() == "") {
+          estadoAsignado = "enviado";
+      } else {
+          estadoAsignado = "atendido";
+      }
+
+      if(cells[3].innerText=='-'){
+        estadoAsignado = "-";
+      }
+
+
+      const res = {
+        codigo: cells[0].innerText,
+        reclamo: cells[3].innerText,
+        estado: estadoAsignado,
+        respuesta: cellsRespuesta[0].value,
+
+      };
+
+
+      nuevasRes.push(res);
+    });
+
+    // Realiza la solicitud al servidor para actualizar los reclamos
+    fetch('http://localhost:3000/reclamos', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(nuevasRes),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data.message);
+      alert("Guardado")
+      location.reload();
+    })
+    .catch(error => console.error('Error al guardar calificaciones:', error));
+
+    
+  }
+
+
+  function guardarRespuestasAlumno() {
+  
+    const tableRows = document.querySelectorAll('#calificacionesTable tbody tr');
+    const nuevasRes = [];
+
+    tableRows.forEach(row => {
+      const cells = row.getElementsByTagName('td');
+      const cellsRespuesta = row.getElementsByTagName('textarea');
+
+
+      const res = {
+        codigo: cells[0].innerText,
+        reclamo: cellsRespuesta[0].value,
+        estado: 'enviado',
+        respuesta: cells[4].innerText,
+
+      };
+
+
+      nuevasRes.push(res);
+    });
+
+    // Realiza la solicitud al servidor para actualizar los reclamos
+    fetch('http://localhost:3000/reclamos', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(nuevasRes),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data.message);
+      alert("Guardado")
+
+    })
+    .catch(error => console.error('Error al guardar calificaciones:', error));
+
+    
   }
