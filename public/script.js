@@ -222,12 +222,25 @@
         estadoAsignado = "-";
       }
 
+      //obteniendo fecha
+      const fecha = new Date();
+    
+    // Obtener día, mes y año
+    const dia = fecha.getDate().toString().padStart(2, '0');
+    const mes = (fecha.getMonth() + 1).toString().padStart(2, '0'); // El mes está basado en cero, por eso se suma 1
+    const año = fecha.getFullYear();
+    
+    // Formatear la fecha como "dd/mm/yyyy"
+    const fechaFormateada = `${dia}/${mes}/${año}`;
+
 
       const res = {
         codigo: cells[0].innerText,
         reclamo: cells[3].innerText,
-        estado: estadoAsignado,
+        fecha_reclamo:cells[4].innerText,
         respuesta: cellsRespuesta[0].value,
+        fecha_respuesta:fechaFormateada,
+        estado: estadoAsignado,
 
       };
 
@@ -264,12 +277,25 @@
       const cells = row.getElementsByTagName('td');
       const cellsRespuesta = row.getElementsByTagName('textarea');
 
+      //obteniendo fecha
+      const fecha = new Date();
+    
+    // Obtener día, mes y año
+    const dia = fecha.getDate().toString().padStart(2, '0');
+    const mes = (fecha.getMonth() + 1).toString().padStart(2, '0'); // El mes está basado en cero, por eso se suma 1
+    const año = fecha.getFullYear();
+    
+    // Formatear la fecha como "dd/mm/yyyy"
+    const fechaFormateada = `${dia}/${mes}/${año}`;
 
       const res = {
         codigo: cells[0].innerText,
         reclamo: cellsRespuesta[0].value,
+        fecha_reclamo: fechaFormateada,
+        respuesta: cells[5].innerText,
+        fecha_respuesta:cells[6].innerText,
         estado: 'enviado',
-        respuesta: cells[4].innerText,
+        
 
       };
 

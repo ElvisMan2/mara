@@ -17,23 +17,36 @@ const getReclamos = (req, res) => {
 
 
 const updateReclamos = (req, res) => {
-    const nuevosReclamos = req.body; // Suponiendo que envías un array de objetos con las nuevas
-    // Realiza las actualizaciones en la base de datos
-    nuevosReclamos.forEach(rec => {
-      const { codigo, reclamo, estado, respuesta } = rec;
-      db.run(
-        'UPDATE calificaciones SET reclamo=?, estado = ?, respuesta = ? WHERE codigo = ?',
-        [reclamo, estado, respuesta, codigo],
-        (err) => {
-          if (err) {
-            console.error(err.message);
-          }
-        }
-      );
-    });
+  const nuevosReclamos = req.body; // Suponiendo que envías un array de objetos con las nuevas reclamaciones
   
-    res.json({ message: 'Reclamos actualizados' });
-  };
+  // Utilizamos una transacción para garantizar que todas las actualizaciones se realicen correctamente o ninguna de ellas en caso de error
+  db.serialize(() => {
+      db.run('BEGIN TRANSACTION');
+      nuevosReclamos.forEach(rec => {
+          const { codigo, reclamo, fecha_reclamo, respuesta, fecha_respuesta } = rec;
+          db.run(
+              'UPDATE calificaciones SET reclamo=?, fecha_reclamo=?, respuesta=?, fecha_respuesta=? WHERE codigo=?',
+              [reclamo, fecha_reclamo, respuesta, fecha_respuesta, codigo],
+              (err) => {
+                  if (err) {
+                      console.error(err.message);
+                      res.status(500).json({ error: 'Error al actualizar reclamos' });
+                      return;
+                  }
+              }
+          );
+      });
+      db.run('COMMIT', (err) => {
+          if (err) {
+              console.error(err.message);
+              res.status(500).json({ error: 'Error al actualizar reclamos' });
+              return;
+          }
+          res.json({ message: 'Reclamos actualizados' });
+      });
+  });
+};
+
 
 
   process.on('SIGINT', () => {

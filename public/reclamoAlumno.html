@@ -26,8 +26,10 @@
             <th>Nombres</th>
             <th>Apellidos</th>
             <th>Reclamo</th>
-            <th>Estado</th>
+            <th>Fecha_reclamo</th>
             <th>Respuesta</th>
+            <th>Fecha_respuesta</th>
+            <th>Estado</th>
           </tr>
         </thead>
         <tbody>
@@ -80,8 +82,11 @@
                   <td class="${registro.codigo}" style="display:none;">${registro.nombres}</td>
                   <td class="${registro.codigo}" style="display:none;">${registro.apellidos}</td>
                   <td class="${registro.codigo}" style="display:none;"><textarea>${registro.reclamo}</textarea></td>
-                  <td class="${registro.codigo}" style="display:none;">${registro.estado}</td>
+                  <td class="${registro.codigo}" style="display:none;">${registro.fecha_reclamo}</td>
                   <td class="${registro.codigo}" style="display:none;">${registro.respuesta}</td>
+                  <td class="${registro.codigo}" style="display:none;">${registro.fecha_respuesta}</td>
+                  <td class="${registro.codigo}" style="display:none;">${registro.estado}</td>
+                  
                   
                 `;
                 tableBody.appendChild(row);

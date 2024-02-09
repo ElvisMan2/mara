@@ -26,8 +26,10 @@
             <th>Nombres</th>
             <th>Apellidos</th>
             <th>Reclamo</th>
-            <th>Estado</th>
+            <th>Fecha reclamo</th>
             <th>Respuesta</th>
+            <th>Fecha respuesta</th>
+            <th>Estado</th>
           </tr>
         </thead>
         <tbody>
@@ -58,7 +60,7 @@
   <script>
     document.addEventListener("DOMContentLoaded", () => {
           // Hacer la solicitud a la API
-          fetch('http://localhost:3000/calificaciones') 
+          fetch('http://localhost:3000/reclamos') 
             .then(response => response.json())
             .then(data => {
               // Procesar los datos y agregar filas a la tabla
@@ -74,14 +76,23 @@
                 if(registro.respuesta==null){
                     registro.respuesta='-';
                 }
+                if(registro.fecha_reclamo==null){
+                    registro.fecha_reclamo='-';
+                }
+                if(registro.fecha_respuesta==null){
+                    registro.fecha_respuesta='-';
+                }
+
                 
                 row.innerHTML = `
                   <td>${registro.codigo}</td>
                   <td>${registro.nombres}</td>
                   <td>${registro.apellidos}</td>
                   <td>${registro.reclamo}</td>
-                  <td>${registro.estado}</td>
+                  <td>${registro.fecha_reclamo}</td>
                   <td><textarea>${registro.respuesta}</textarea></td>
+                  <td>${registro.fecha_respuesta}</td>
+                  <td>${registro.estado}</td>
                   
                 `;
                 tableBody.appendChild(row);
