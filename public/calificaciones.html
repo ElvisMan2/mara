@@ -19,8 +19,19 @@
     <h1 class="text-center mt-4 mb-4">Ingreso de calificaciones</h1>
     <h5>Curso: Interacción Hombre computador</h5>
     <h5 class="mb-4">Docente: Hugo Froilan Vega Huerta</h5>
+    <table>
+      <tr>
+        <th style="width: 630px;"></th>
+        
+        <th><button onclick="registrar('parcial');">Dictar</button></th>
+        <th><button onclick="registrar('final');">Dictar</button></th>
+        <th><button onclick="registrar('continua');">Dictar</button></th>
+        <th style="width: 200px;"></th>
+      </tr>
+    </table>
     <table id="calificacionesTable">
         <thead id="encabezado">
+          
           <tr>
             <th>Código</th>
             <th>Nombres</th>
@@ -98,6 +109,7 @@
         });
     
   </script>
+  <script src="./voz.js"></script>
 
   
 

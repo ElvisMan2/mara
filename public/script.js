@@ -36,7 +36,7 @@
     .then(response => response.json())
     .then(data => {
       console.log(data.message);
-      alert("Calificaciones guardadas correctamente")
+      leerTexto("Calificaciones guardadas");
     })
     .catch(error => console.error('Error al guardar calificaciones:', error));
   }
@@ -67,7 +67,7 @@
 
     }
 
-    alert("Promedios calculados!")
+    leerTexto("Promedios calculados!");
   }
 
   function iniciarSesion(){
@@ -321,3 +321,14 @@
 
     
   }
+
+
+
+  function leerTexto (text) {
+    const speech = new SpeechSynthesisUtterance(text);
+    speech.volume = 1;
+    speech.rate = 1;
+    speech.pitch = 1;
+    speech.lang = 'es-ES'
+    window.speechSynthesis.speak(speech);
+}
